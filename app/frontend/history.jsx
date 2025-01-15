@@ -2,17 +2,16 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 
 const HistoryScreen = ({ navigation }) => {
-    // Ini hanya contoh data, Anda bisa mengambil data riil dari state atau props
     const historyData = [
-        { id: 1, title: 'Quiz 1', result: '80%' },
-        { id: 2, title: 'Quiz 2', result: '90%' },
-        { id: 3, title: 'Quiz 3', result: '75%' },
+        { id: 1, title: 'Quiz 1', result: '80%', date: '2023-01-10' },
+        { id: 2, title: 'Quiz 2', result: '90%', date: '2023-01-12' },
+        { id: 3, title: 'Quiz 3', result: '75%', date: '2023-01-15' },
     ];
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
                     <Image source={require('path-to-assets/logo.webp')} style={styles.logo} />
                 </TouchableOpacity>
                 <View style={styles.userInfo}>
@@ -27,8 +26,9 @@ const HistoryScreen = ({ navigation }) => {
                 <Text style={styles.title}>Quiz History</Text>
                 {historyData.map((item) => (
                     <View key={item.id} style={styles.historyItem}>
-                        <Text>{item.title}</Text>
-                        <Text>{item.result}</Text>
+                        <Text style={styles.quizTitle}>{item.title}</Text>
+                        <Text style={styles.result}>{item.result}</Text>
+                        <Text style={styles.date}>{item.date}</Text>
                     </View>
                 ))}
             </ScrollView>
@@ -45,8 +45,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 15,
+        padding: 20,
         backgroundColor: '#f6f7f2',
+    },
+    backButton: {
+        padding: 10, // For easier touch
     },
     logo: {
         width: 60,
@@ -58,9 +61,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     username: {
-        marginRight: 10,
         fontSize: 16,
         color: '#333',
+        marginRight: 10,
     },
     profilePic: {
         width: 40,
@@ -70,27 +73,48 @@ const styles = StyleSheet.create({
     logoutButton: {
         backgroundColor: '#3c4f6d',
         marginLeft: 10,
-        padding: 10,
+        padding: 8,
         borderRadius: 5,
     },
     logoutButtonText: {
         color: '#f6f7f2',
-        fontSize: 16,
+        fontSize: 14,
     },
     historyContainer: {
-        marginTop: 20,
+        flex: 1,
         paddingHorizontal: 20,
     },
     title: {
-        fontSize: 22,
+        fontSize: 24,
+        fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 20,
     },
     historyItem: {
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd',
+        backgroundColor: '#fff',
+        padding: 20,
+        borderRadius: 10,
         marginBottom: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 3,
+    },
+    quizTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#333',
+    },
+    result: {
+        fontSize: 16,
+        color: '#3c4f6d',
+        marginTop: 5,
+    },
+    date: {
+        fontSize: 14,
+        color: '#666',
+        marginTop: 5,
     }
 });
 

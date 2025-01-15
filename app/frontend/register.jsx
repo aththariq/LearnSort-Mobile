@@ -19,7 +19,7 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.keyboardView}>
         <Text style={styles.header}>Register</Text>
         <Text style={styles.subText}>
           Already have an account?{' '}
@@ -37,6 +37,7 @@ const RegisterScreen = ({ navigation }) => {
           value={username}
           onChangeText={setUsername}
           placeholder="Your username"
+          placeholderTextColor="#ccc"
         />
         <TextInput
           style={styles.input}
@@ -44,6 +45,7 @@ const RegisterScreen = ({ navigation }) => {
           onChangeText={setEmail}
           placeholder="Email"
           keyboardType="email-address"
+          placeholderTextColor="#ccc"
         />
         <View style={styles.passwordContainer}>
           <TextInput
@@ -52,9 +54,10 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setPassword}
             placeholder="Password"
             secureTextEntry={showPassword}
+            placeholderTextColor="#ccc"
           />
           <TouchableOpacity style={styles.toggle} onPress={toggleShowPassword}>
-            <Text>{showPassword ? '👁️' : '👁️‍🗨️'}</Text>
+            <Text style={styles.eyeIcon}>{showPassword ? '👁️' : '👁️‍🗨️'}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.passwordContainer}>
@@ -64,9 +67,10 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setConfirmPassword}
             placeholder="Confirm Password"
             secureTextEntry={showConfirmPassword}
+            placeholderTextColor="#ccc"
           />
           <TouchableOpacity style={styles.toggle} onPress={toggleShowConfirmPassword}>
-            <Text>{showConfirmPassword ? '👁️' : '👁️‍🗨️'}</Text>
+            <Text style={styles.eyeIcon}>{showConfirmPassword ? '👁️' : '👁️‍🗨️'}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.button} onPress={() => {}}>
@@ -87,19 +91,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#fff',
+  },
+  keyboardView: {
+    width: '100%',
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#0a1944',
   },
   subText: {
     marginBottom: 10,
     fontSize: 16,
-    color: '#000',
+    color: '#333',
   },
   link: {
-    color: 'blue',
+    color: '#0a1944',
   },
   divider: {
     flexDirection: 'row',
@@ -119,10 +128,12 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#000',  // Changed to black
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,
+    backgroundColor: '#fff',
+    color: '#333',
   },
   passwordContainer: {
     position: 'relative',
@@ -132,6 +143,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 12,
+  },
+  eyeIcon: {
+    color: '#333',
   },
   button: {
     backgroundColor: '#0a1944',

@@ -12,7 +12,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require('path-to-assets/logo.webp')} />
+      <Image style={styles.logo} source={require('assets/icons/home.png')} />
       <Text style={styles.title}>Login</Text>
       <Text style={styles.linkText}>
         Don't have an account?{' '}
@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
         </Text>
       </Text>
       <TouchableOpacity style={styles.googleButton} onPress={() => {}}>
-        <Image style={styles.googleLogo} source={require('path-to-assets/Google.svg')} />
+        <Image style={styles.googleLogo} source={require('assets/icons/eye.png')} />
         <Text style={styles.googleText}>Sign in with Google</Text>
       </TouchableOpacity>
       <View style={styles.divider}>
