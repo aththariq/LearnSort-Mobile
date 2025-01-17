@@ -33,17 +33,25 @@ const RootLayout = () => {
 
       {/* Grup Route untuk Autentikasi */}
       <Stack.Screen
-        name="(auth)" // Grup route untuk autentikasi
+        name="(auth)"
         options={{
-          headerShown: false, // Sembunyikan header untuk grup route ini
+          headerShown: false,
         }}
       />
 
       {/* Grup Route untuk Tabs */}
       <Stack.Screen
-        name="(tabs)" // Grup route untuk tab navigasi
+        name="(tabs)"
         options={{
-          headerShown: false, // Sembunyikan header untuk grup route ini
+          headerShown: false,
+        }}
+      />
+
+      {/* Grup Route untuk Sorting */}
+      <Stack.Screen
+        name="sorting"
+        options={{
+          headerShown: false,
         }}
       />
     </Stack>

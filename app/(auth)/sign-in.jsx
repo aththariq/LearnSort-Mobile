@@ -42,8 +42,14 @@ const SignIn = () => {
         const data = await response.json();
 
         if (response.ok) {
-          await AsyncStorage.setItem("userToken", data.token);
-          router.replace("/home");
+          // Pastikan token ada sebelum menyimpannya
+          if (data.token) {
+            await AsyncStorage.setItem("userToken", data.token);
+            console.log("Token berhasil disimpan:", data.token);
+            router.replace("/home");
+          } else {
+            Alert.alert("Login Failed", "Token not found in response");
+          }
         } else {
           Alert.alert("Login Failed", data.message || "Something went wrong");
         }
@@ -79,6 +85,11 @@ const SignIn = () => {
       console.log("API Response:", data);
 
       if (response.ok) {
+        // Simpan token ke AsyncStorage
+        await AsyncStorage.setItem("userToken", data.token);
+        console.log("Token berhasil disimpan:", data.token);
+
+        // Navigasi ke halaman home
         router.replace("/(tabs)/home");
       } else {
         Alert.alert("Login Failed", data.message || "Something went wrong");
