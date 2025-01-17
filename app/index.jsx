@@ -17,7 +17,7 @@ export default function App() {
           />
 
           <Image
-            source={images.cards}
+            source={images.sort}
             className="max-w-[360px] h-[300px]"
             resizeMode="contain"
           />
@@ -30,7 +30,7 @@ export default function App() {
           </View>
           <Text className="text-sm font-pregular text-gray-400 mt-3 text-center mx-8">
             Where creativity meets innovation: embark on a journet of limitless
-            exploration with Aora
+            exploration with LearnSort
           </Text>
           <CustomButton
             title="Continue with Email"

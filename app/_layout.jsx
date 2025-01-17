@@ -28,7 +28,32 @@ const RootLayout = () => {
 
   return (
     <Stack>
+      {/* Splash Screen */}
       <Stack.Screen name="index" options={{ headerShown: false }} />
+
+      {/* Grup Route untuk Autentikasi */}
+      <Stack.Screen
+        name="(auth)" // Grup route untuk autentikasi
+        options={{
+          headerShown: false, // Sembunyikan header untuk grup route ini
+        }}
+      />
+
+      {/* Grup Route untuk Tabs */}
+      <Stack.Screen
+        name="(tabs)" // Grup route untuk tab navigasi
+        options={{
+          headerShown: false, // Sembunyikan header untuk grup route ini
+        }}
+      />
+
+      {/* Halaman Pencarian */}
+      <Stack.Screen
+        name="search" // Halaman pencarian
+        options={{
+          headerShown: false, // Sembunyikan header untuk halaman ini
+        }}
+      />
     </Stack>
   );
 };

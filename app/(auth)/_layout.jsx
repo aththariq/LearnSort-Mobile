@@ -1,12 +1,23 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Stack } from "expo-router";
+import React from "react";
 
 const AuthLayout = () => {
   return (
-    <View>
-      <Text>_layout</Text>
-    </View>
-  )
-}
+    <Stack>
+      <Stack.Screen
+        name="sign-in" // Halaman login
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="sign-up" // Halaman register
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack>
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;

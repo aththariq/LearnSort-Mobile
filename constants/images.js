@@ -1,9 +1,11 @@
-import profile from "../assets/images/profile.png";
-import thumbnail from "../assets/images/thumbnail.png";
-import cards from "../assets/images/cards.png";
-import path from "../assets/images/path.png";
-import logo from "../assets/images/logo.png";
-import logoSmall from "../assets/images/logo-small.png";
-import empty from "../assets/images/empty.png";
+const icon = require("../assets/icon.png");
+const logo = require("../assets/logo.png");
+const sort = require("../assets/images/sort.png");
 
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty };
+const images = {
+  icon,
+  logo,
+  sort,
+};
+
+export default images;
