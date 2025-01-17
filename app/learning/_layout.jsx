@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 const Layout = () => {
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: "Sorting Algorithms" }} />
+      <Stack.Screen name="index" options={{ title: "Learning Modules" }} />
       <Stack.Screen name="bubblesort" options={{ title: "Bubble Sort" }} />
       <Stack.Screen
         name="insertionsort"

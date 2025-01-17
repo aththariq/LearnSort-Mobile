@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
 const BubbleSort = () => {
@@ -8,35 +8,69 @@ const BubbleSort = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sortedIndex, setSortedIndex] = useState(array.length);
   const intervalRef = useRef(null);
+  const [iterations, setIterations] = useState(0);
+  const [timer, setTimer] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  
+  const isArraySorted = (arr) => {
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) return false;
+    }
+    return true;
+  };
+
+  
+  useEffect(() => {
+    let intervalId;
+    if (isTimerRunning) {
+      intervalId = setInterval(() => {
+        setTimer(prev => prev + 10); 
+      }, 10);
+    }
+    return () => clearInterval(intervalId);
+  }, [isTimerRunning]);
 
   const startSorting = () => {
     if (!isSorting) {
       setIsSorting(true);
+      setIsTimerRunning(true); 
+      setIterations(0); 
       intervalRef.current = setInterval(() => {
-        setArray((prevArray) => {
-          const newArray = [...prevArray];
-          if (currentIndex < sortedIndex - 1) {
-            // Bandingkan dan tukar elemen
-            if (newArray[currentIndex] > newArray[currentIndex + 1]) {
-              [newArray[currentIndex], newArray[currentIndex + 1]] = [
-                newArray[currentIndex + 1],
-                newArray[currentIndex],
-              ];
-            }
-            setCurrentIndex((prevIndex) => prevIndex + 1);
+        setCurrentIndex(prevIndex => {
+          if (prevIndex < sortedIndex - 1) {
+            setArray(prevArray => {
+              const newArray = [...prevArray];
+              if (newArray[prevIndex] > newArray[prevIndex + 1]) {
+                [newArray[prevIndex], newArray[prevIndex + 1]] = 
+                [newArray[prevIndex + 1], newArray[prevIndex]];
+              }
+              
+              if (isArraySorted(newArray)) {
+                clearInterval(intervalRef.current);
+                setIsSorting(false);
+                setIsTimerRunning(false); 
+              }
+              return newArray;
+            });
+            return prevIndex + 1;
           } else {
-            // Selesai satu iterasi, reset indeks dan kurangi sortedIndex
-            setSortedIndex((prevSortedIndex) => prevSortedIndex - 1);
-            setCurrentIndex(0);
-            // Jika array sudah terurut, hentikan interval
-            if (sortedIndex <= 1) {
-              clearInterval(intervalRef.current);
-              setIsSorting(false);
-            }
+            
+            setArray(prevArray => {
+              if (isArraySorted(prevArray)) {
+                clearInterval(intervalRef.current);
+                setIsSorting(false);
+                setIsTimerRunning(false); 
+                return prevArray;
+              }
+              return prevArray;
+            });
+            setSortedIndex(prev => prev - 1);
+            setIterations(prev => prev + 1); 
+            return 0;
           }
-          return newArray;
         });
-      }, 500); // Delay 500ms untuk setiap langkah
+      }, 500);
     }
   };
 
@@ -51,6 +85,15 @@ const BubbleSort = () => {
     setArray([...initialArray]);
     setCurrentIndex(0);
     setSortedIndex(initialArray.length);
+    setIterations(0);
+    setTimer(0);
+    setIsTimerRunning(false);
+  };
+
+  const formatTime = (ms) => {
+    const seconds = Math.floor(ms / 1000);
+    const milliseconds = ms % 1000;
+    return `${seconds}.${milliseconds.toString().padStart(3, '0')}s`;
   };
 
   return (
@@ -100,6 +143,12 @@ const BubbleSort = () => {
         >
           <Text className="text-white text-lg">Reset</Text>
         </TouchableOpacity>
+      </View>
+
+      {/* Stats Display */}
+      <View className="mt-5 items-center">
+        <Text className="text-lg">Iterations: {iterations}</Text>
+        <Text className="text-lg">Time: {formatTime(timer)}</Text>
       </View>
     </View>
   );
