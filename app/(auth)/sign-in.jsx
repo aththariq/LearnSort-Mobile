@@ -7,47 +7,43 @@ import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-WebBrowser.maybeCompleteAuthSession(); // Untuk menangani redirect setelah login
+WebBrowser.maybeCompleteAuthSession();
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(true);
 
-  // Konfigurasi Google OAuth
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId:
-      "1007158782494-j5u6ksed2gjdpg097r7fjegmtfb8a0hc.apps.googleusercontent.com", // Ganti dengan Expo Client ID Anda
+      "1007158782494-j5u6ksed2gjdpg097r7fjegmtfb8a0hc.apps.googleusercontent.com",
     iosClientId:
-      "1007158782494-itc4ov8k3dh9fgd9iceenmqfgphtrsjc.apps.googleusercontent.com", // Ganti dengan iOS Client ID Anda
+      "1007158782494-itc4ov8k3dh9fgd9iceenmqfgphtrsjc.apps.googleusercontent.com",
+    androidClientId:
+      "1007158782494-0g24qqkoactqucas786dki6t46iq69ms.apps.googleusercontent.com",
   });
 
-  // Handle login dengan Google
   const handleGoogleLogin = async () => {
     try {
-      // Memulai proses login dengan Google
       const result = await promptAsync();
       if (result.type === "success") {
-        // Dapatkan ID token dari respons
         const { id_token } = result.params;
 
-        // Kirim ID token ke backend
         const response = await fetch(`${API_URL}/api/auth/google`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            token: id_token, // Kirim ID token ke backend
+            token: id_token,
           }),
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          // Simpan token JWT dan arahkan ke halaman home
           await AsyncStorage.setItem("userToken", data.token);
-          router.replace("/(tabs)/home");
+          router.replace("/home");
         } else {
           Alert.alert("Login Failed", data.message || "Something went wrong");
         }
@@ -66,7 +62,7 @@ const SignIn = () => {
 
   const handleLogin = async () => {
     try {
-      console.log("API URL:", `${API_URL}/api/auth/login`); // Debugging
+      console.log("API URL:", `${API_URL}/api/auth/login`);
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -78,9 +74,9 @@ const SignIn = () => {
         }),
       });
 
-      console.log("Response Status:", response.status); // Debugging
+      console.log("Response Status:", response.status);
       const data = await response.json();
-      console.log("API Response:", data); // Debugging
+      console.log("API Response:", data);
 
       if (response.ok) {
         router.replace("/(tabs)/home");
@@ -88,7 +84,7 @@ const SignIn = () => {
         Alert.alert("Login Failed", data.message || "Something went wrong");
       }
     } catch (error) {
-      console.error("API Error:", error); // Debugging
+      console.error("API Error:", error);
       Alert.alert("Error", "An error occurred while logging in");
     }
   };

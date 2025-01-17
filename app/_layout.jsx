@@ -46,14 +46,6 @@ const RootLayout = () => {
           headerShown: false, // Sembunyikan header untuk grup route ini
         }}
       />
-
-      {/* Halaman Pencarian */}
-      <Stack.Screen
-        name="search" // Halaman pencarian
-        options={{
-          headerShown: false, // Sembunyikan header untuk halaman ini
-        }}
-      />
     </Stack>
   );
 };

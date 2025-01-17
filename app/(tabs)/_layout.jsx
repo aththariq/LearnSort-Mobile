@@ -30,7 +30,7 @@ export default function TabsLayout() {
               size={24}
               color={focused ? "white" : "gray"} // Warna ikon berubah saat aktif
               style={{
-                backgroundColor: focused ? "#FF6F61" : "transparent", // Warna background ikon saat aktif
+                backgroundColor: focused ? "#0A1A45" : "transparent", // Warna background ikon saat aktif
                 padding: 8,
                 borderRadius: 8,
               }}
@@ -51,7 +51,7 @@ export default function TabsLayout() {
               size={24}
               color={focused ? "white" : "gray"} // Warna ikon berubah saat aktif
               style={{
-                backgroundColor: focused ? "#FF6F61" : "transparent", // Warna background ikon saat aktif
+                backgroundColor: focused ? "#0A1A45" : "transparent", // Warna background ikon saat aktif
                 padding: 8,
                 borderRadius: 8,
               }}
