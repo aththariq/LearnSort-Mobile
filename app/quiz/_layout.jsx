@@ -2,26 +2,21 @@ import { Stack } from "expo-router";
 
 export default function QuizLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerShown: true,
-        animation: "slide_from_right",
-      }}
-    >
+    <Stack>
       <Stack.Screen
-        name="index"
+        name="[quizId]"
         options={{
-          title: "Quiz",
+          title: "Quiz", // Judul untuk halaman quiz dengan parameter quizId
           headerShown: true,
-          headerBackVisible: true,
+          headerBackTitle: "Kembali", // Teks tombol panah kiri
         }}
       />
       <Stack.Screen
         name="result"
         options={{
-          title: "Hasil Quiz",
+          title: "Hasil Quiz", // Judul untuk halaman hasil quiz
           headerShown: true,
-          headerBackVisible: true,
+          headerBackTitle: "Kembali", // Teks tombol panah kiri
         }}
       />
     </Stack>

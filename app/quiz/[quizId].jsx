@@ -6,6 +6,7 @@ import { API_URL } from "@env";
 
 const Quiz = () => {
   const { quizId } = useLocalSearchParams();
+  console.log("Received quizId:", quizId); // Debug log
   const [quizData, setQuizData] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
 
@@ -53,8 +54,9 @@ const Quiz = () => {
         const result = await response.json();
         await AsyncStorage.setItem("lastQuizScore", result.score.toString());
 
+        // Navigasi ke halaman hasil quiz
         router.push({
-          pathname: "/(quiz)/result", // Sesuaikan dengan struktur file
+          pathname: "/quiz/result",
           params: {
             score: result.score,
             correctAnswers: result.correctAnswers,
@@ -63,7 +65,7 @@ const Quiz = () => {
         });
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error submitting quiz:", error);
     }
   };
 

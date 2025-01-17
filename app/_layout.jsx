@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
+import { SafeAreaProvider } from "react-native-safe-area-context"; // Impor SafeAreaProvider
 import "../global.css";
 import { useEffect } from "react";
 
@@ -27,34 +28,39 @@ const RootLayout = () => {
   if (!fontsLoaded && !error) return null;
 
   return (
-    <Stack>
-      {/* Splash Screen */}
-      <Stack.Screen name="index" options={{ headerShown: false }} />
+    <SafeAreaProvider>
+      <Stack>
+        {/* Splash Screen */}
+        <Stack.Screen name="index" options={{ headerShown: false }} />
 
-      {/* Grup Route untuk Autentikasi */}
-      <Stack.Screen
-        name="(auth)"
-        options={{
-          headerShown: false,
-        }}
-      />
+        {/* Grup Route untuk Autentikasi */}
+        <Stack.Screen
+          name="(auth)"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "#ffffff" }, // Atur warna latar belakang
+          }}
+        />
 
-      {/* Grup Route untuk Tabs */}
-      <Stack.Screen
-        name="(tabs)"
-        options={{
-          headerShown: false,
-        }}
-      />
+        {/* Grup Route untuk Tabs */}
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "#ffffff" }, // Atur warna latar belakang
+          }}
+        />
 
-      {/* Grup Route untuk Sorting */}
-      <Stack.Screen
-        name="sorting"
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack>
+        {/* Grup Route untuk Sorting */}
+        <Stack.Screen
+          name="sorting"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "#ffffff" }, // Atur warna latar belakang
+          }}
+        />
+      </Stack>
+    </SafeAreaProvider>
   );
 };
 

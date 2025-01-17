@@ -5,14 +5,20 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const QuizResult = () => {
   const { score, correctAnswers, totalQuestions } = useLocalSearchParams();
+  console.log(
+    "Received parameters in QuizResult:",
+    score,
+    correctAnswers,
+    totalQuestions
+  ); // Debug log
 
   const handleNext = async () => {
     if (parseInt(score) === 100) {
       await AsyncStorage.removeItem("currentQuiz");
       await AsyncStorage.removeItem("lastQuizScore");
-      router.push("/quizhome"); // Kembali ke halaman utama
+      router.replace("/quiz"); // Kembali ke halaman /quiz
     } else {
-      router.push("/quizhome"); // Kembali ke halaman utama
+      router.replace("/quiz"); // Kembali ke halaman /quiz
     }
   };
 

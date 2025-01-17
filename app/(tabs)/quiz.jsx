@@ -61,11 +61,8 @@ const QuizHome = () => {
           // Simpan data quiz ke AsyncStorage
           await AsyncStorage.setItem("currentQuiz", JSON.stringify(data));
 
-          // Navigasi ke halaman quiz
-          router.push({
-            pathname: "/(quiz)/index", // Sesuaikan dengan struktur file
-            params: { quizId: data.quizId }, // Kirim quizId sebagai parameter
-          });
+          // Navigasi ke halaman quiz dengan dynamic route
+          router.replace(`/quiz/${data.quizId}`);
         }
       }
     } catch (error) {
