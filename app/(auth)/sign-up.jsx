@@ -146,7 +146,7 @@ const SignUp = () => {
         <Text className="mt-4 text-center">
           Already have an account?{" "}
           <Text
-            onPress={() => router.replace("/(auth)/sign-in")} // Redirect ke halaman login
+            onPress={() => router.replace("/sign-in")}
             className="text-blue-500"
           >
             Login
